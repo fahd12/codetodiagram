@@ -1,0 +1,100 @@
+flowchart TD
+    %% Truncated: 308 nodes omitted
+    n0004d86973196028(["Entry: health<br/>services/whisper/server.py:148"])
+    n0329cee42128af5c["_llama_repo_cached<br/>__main__.py:51"]
+    n043db2a91581e0dd(["Entry: __main__<br/>services/kokoro_onnx/server.py:177"])
+    n061c95caaa715546["streaming_transcribe<br/>services/nemotron/server.py:187"]
+    n090ee2c63d940827["detect_hardware<br/>profiles.py:273"]
+    n0ac98e6b34629a7b["getenv<br/>external"]:::external
+    n0b22988422d81cc9(["Entry: __main__<br/>__main__.py:602"])
+    n0bc911d9350799ff["_mint_token<br/>api.py:79"]
+    n0fd210df18e4c404(["Entry: speech<br/>services/kokoro_onnx/server.py:132"])
+    n1b4d2a22bf6d3a6a(["Entry: healthz<br/>api.py:271"])
+    n2302212c4882104c(["Entry: __main__<br/>agent.py:199"])
+    n267af5d620fdbc1d["main<br/>__main__.py:576"]
+    n3720556b5c3ab5ab["ensure_model<br/>services/nemotron_cpp/launcher.py:80"]
+    n44c757f92bd0488a(["Entry: list_models<br/>services/whisper/server.py:131"])
+    n4b6ab5cf5ffbeacf(["Entry: list_models<br/>services/kokoro_onnx/server.py:156"])
+    n4ecc58a01eb80fda(["Entry: __main__<br/>native_runtime.py:171"])
+    n50b44b4ca5722276["direct_transcribe<br/>services/nemotron/server.py:160"]
+    n527e2351402ffb70["_serve<br/>__main__.py:389"]
+    n5ce3bbfdabdb6946["install_archive<br/>native_runtime.py:105"]
+    n634c884462ce44cd(["Entry: list_models<br/>services/kokoro/server.py:114"])
+    n6b256e868a9f13d7(["Entry: health<br/>services/nemotron/server.py:390"])
+    n6da88c34ba124c41["int<br/>external"]:::external
+    n72f30ddbba8f655f(["Entry: connection_details<br/>api.py:250"])
+    n7626e561a815307a(["Entry: gateway_models<br/>api.py:195"])
+    n7b66d73197704fd4["main<br/>native_runtime.py:153"]
+    n87320bb5a81bb714["from_env<br/>config.py:203"]
+    n8c25cb3686462e9a["str<br/>external"]:::external
+    n8c6fb1e9e37a1aea["lower<br/>external"]:::external
+    n9095b00bc85d308e(["Entry: __main__<br/>services/nemotron_cpp/launcher.py:209"])
+    n916789e1cb6ac049["load_catalog<br/>profiles.py:137"]
+    n95676b54b3306ba5(["Entry: transcribe<br/>services/whisper/server.py:74"])
+    n9936d9aa4775646f["load_selection<br/>profiles.py:425"]
+    na04891539f4d3f26(["Entry: health<br/>services/kokoro/server.py:131"])
+    na296d98e2d9af2b2["_synthesize<br/>services/kokoro/server.py:67"]
+    na3a688a50fab50d7(["Entry: speech<br/>services/kokoro/server.py:96"])
+    na5076a47ff25d070(["Entry: transcribe<br/>services/nemotron/server.py:316"])
+    na5fc45c208edc7c2["_build_specs<br/>__main__.py:167"]
+    nab8d8d7e162dad24(["Entry: status<br/>api.py:234"])
+    nbdc054786871583a(["Entry: health<br/>services/kokoro_onnx/server.py:173"])
+    nbe212f41c95590cc["main<br/>services/nemotron_cpp/launcher.py:169"]
+    nc071c23f6cfa22e3["_total_memory_bytes<br/>profiles.py:211"]
+    nc111037a169c8ce1["resolve_binary<br/>services/nemotron_cpp/launcher.py:138"]
+    nd7447d305884728f["_apply_profile_defaults<br/>__main__.py:523"]
+    nd78097ae1e66ff5f(["Entry: __main__<br/>services/nemotron/server.py:410"])
+    nd82ecce46661e677["sse_generator<br/>services/nemotron/server.py:286"]
+    nd8c1f197bdd0bf29(["Entry: __main__<br/>services/kokoro/server.py:135"])
+    ndabc7ec315bc0800["resolve_profile<br/>profiles.py:347"]
+    nee348a6d4572d07e(["Entry: list_models<br/>services/nemotron/server.py:373"])
+    nf10f911a706dd8e6(["Entry: __main__<br/>services/whisper/server.py:152"])
+    nf57898c769598475["load_audio<br/>services/nemotron/server.py:108"]
+    n061c95caaa715546 -.-> n8c25cb3686462e9a
+    n090ee2c63d940827 --> nc071c23f6cfa22e3
+    n0b22988422d81cc9 --> n267af5d620fdbc1d
+    n0fd210df18e4c404 -.-> n8c6fb1e9e37a1aea
+    n0fd210df18e4c404 -.-> n8c25cb3686462e9a
+    n267af5d620fdbc1d --> n87320bb5a81bb714
+    n267af5d620fdbc1d --> n527e2351402ffb70
+    n44c757f92bd0488a -.-> n6da88c34ba124c41
+    n4b6ab5cf5ffbeacf -.-> n6da88c34ba124c41
+    n4ecc58a01eb80fda --> n7b66d73197704fd4
+    n50b44b4ca5722276 -.-> n8c25cb3686462e9a
+    n527e2351402ffb70 --> na5fc45c208edc7c2
+    n634c884462ce44cd -.-> n6da88c34ba124c41
+    n72f30ddbba8f655f --> n0bc911d9350799ff
+    n72f30ddbba8f655f -.-> n8c25cb3686462e9a
+    n7b66d73197704fd4 --> n5ce3bbfdabdb6946
+    n87320bb5a81bb714 -.-> n0ac98e6b34629a7b
+    n87320bb5a81bb714 -.-> n8c6fb1e9e37a1aea
+    n87320bb5a81bb714 -.-> n6da88c34ba124c41
+    n87320bb5a81bb714 -.-> n8c25cb3686462e9a
+    n9095b00bc85d308e --> nbe212f41c95590cc
+    n916789e1cb6ac049 -.-> n6da88c34ba124c41
+    n916789e1cb6ac049 -.-> n8c25cb3686462e9a
+    n9936d9aa4775646f -.-> n6da88c34ba124c41
+    n9936d9aa4775646f -.-> n8c25cb3686462e9a
+    na3a688a50fab50d7 --> na296d98e2d9af2b2
+    na3a688a50fab50d7 -.-> n8c25cb3686462e9a
+    na5076a47ff25d070 --> nf57898c769598475
+    na5076a47ff25d070 --> nd82ecce46661e677
+    na5076a47ff25d070 --> n50b44b4ca5722276
+    na5fc45c208edc7c2 -.-> n0ac98e6b34629a7b
+    na5fc45c208edc7c2 -.-> n8c25cb3686462e9a
+    na5fc45c208edc7c2 --> n0329cee42128af5c
+    nbe212f41c95590cc -.-> n6da88c34ba124c41
+    nbe212f41c95590cc -.-> n0ac98e6b34629a7b
+    nbe212f41c95590cc --> n3720556b5c3ab5ab
+    nbe212f41c95590cc --> nc111037a169c8ce1
+    nc071c23f6cfa22e3 -.-> n6da88c34ba124c41
+    nc111037a169c8ce1 -.-> n0ac98e6b34629a7b
+    nc111037a169c8ce1 -.-> n8c25cb3686462e9a
+    nd7447d305884728f --> n9936d9aa4775646f
+    nd7447d305884728f --> ndabc7ec315bc0800
+    nd7447d305884728f --> n916789e1cb6ac049
+    nd7447d305884728f --> n090ee2c63d940827
+    nd82ecce46661e677 --> n061c95caaa715546
+    nd82ecce46661e677 -.-> n8c25cb3686462e9a
+    nee348a6d4572d07e -.-> n6da88c34ba124c41
+    classDef external stroke-dasharray: 5 5

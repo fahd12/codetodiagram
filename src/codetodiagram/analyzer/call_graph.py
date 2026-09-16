@@ -35,6 +35,30 @@ class CallGraph:
         self._nodes[node.id] = node
         return node
 
+    def upsert_node(self, node: Node) -> Node:
+        """Insert ``node``, merging entry/external flags if the id exists.
+
+        Args:
+            node: Node to store or merge.
+
+        Returns:
+            The stored node after merge.
+        """
+        existing = self._nodes.get(node.id)
+        if existing is None:
+            self._nodes[node.id] = node
+            return node
+        merged = Node(
+            id=existing.id,
+            name=existing.name,
+            file=existing.file or node.file,
+            line=existing.line or node.line,
+            is_entry=existing.is_entry or node.is_entry,
+            is_external=existing.is_external and node.is_external,
+        )
+        self._nodes[node.id] = merged
+        return merged
+
     def get_node(self, node_id: str) -> Node | None:
         """Return the node for ``node_id``, or ``None`` if missing."""
         return self._nodes.get(node_id)
