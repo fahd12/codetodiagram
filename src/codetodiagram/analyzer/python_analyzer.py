@@ -124,7 +124,9 @@ class PythonAnalyzer(LanguageAnalyzer):
 
     def _collect_files(self, root: Path) -> list[Path]:
         if root.is_file():
-            return [root] if root.suffix == ".py" and not self._is_excluded(root, root.parent) else []
+            if root.suffix == ".py" and not self._is_excluded(root, root.parent):
+                return [root]
+            return []
 
         collected: list[Path] = []
 
@@ -255,7 +257,9 @@ class PythonAnalyzer(LanguageAnalyzer):
                     graph.upsert_node(node)
                     self._qnames[node.id] = f"{parsed.module}.__main__"
                     for called in entry.called_names:
-                        callee_qname = self._resolve_name(called, parsed.module, None, parsed.imports)
+                        callee_qname = self._resolve_name(
+                            called, parsed.module, None, parsed.imports
+                        )
                         target = self._node_for_qname(callee_qname)
                         graph.upsert_node(target)
                         graph.add_edge(node.id, target.id)

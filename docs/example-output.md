@@ -1,0 +1,44 @@
+# Example output
+
+Generated from `tests/fixtures/sample_project/`:
+
+- Flask route `index` in `app.py`
+- `if __name__ == "__main__"` in the same file
+- Shared helper `greet`, used by both entries
+- External call `requests.get` from `fetch_remote`
+
+```mermaid
+flowchart TD
+    n0ea057f4bb5ef2b8["get<br/>external"]:::external
+    n115fa91855b56bae["format_message<br/>helpers.py:13"]
+    n262692e051323530["fetch_remote<br/>helpers.py:18"]
+    n3570da1d03de1fda["normalize<br/>users.py:14"]
+    n779f8d511e7254f4(["Entry: __main__<br/>app.py:23"])
+    n7c40dc7dfb0d02b5["getattr<br/>external"]:::external
+    n8c25cb3686462e9a["str<br/>external"]:::external
+    n922318c25001607a["display_name<br/>users.py:9"]
+    na3b0860d24b80397["greet<br/>helpers.py:8"]
+    nd63b4e348658ee13["load_user<br/>users.py:4"]
+    nea7dcb77f97f7176["parse_status<br/>helpers.py:24"]
+    nf6af502f8db4b076(["Entry: index<br/>app.py:12"])
+    n262692e051323530 -.-> n0ea057f4bb5ef2b8
+    n262692e051323530 --> nea7dcb77f97f7176
+    n3570da1d03de1fda -.-> n8c25cb3686462e9a
+    n779f8d511e7254f4 --> na3b0860d24b80397
+    n922318c25001607a --> n3570da1d03de1fda
+    na3b0860d24b80397 --> n115fa91855b56bae
+    na3b0860d24b80397 --> n922318c25001607a
+    nd63b4e348658ee13 --> n922318c25001607a
+    nea7dcb77f97f7176 -.-> n7c40dc7dfb0d02b5
+    nea7dcb77f97f7176 -.-> n8c25cb3686462e9a
+    nf6af502f8db4b076 --> nd63b4e348658ee13
+    nf6af502f8db4b076 --> na3b0860d24b80397
+    nf6af502f8db4b076 --> n262692e051323530
+    classDef external stroke-dasharray: 5 5
+```
+
+Reproduce:
+
+```bash
+codetodiagram tests/fixtures/sample_project
+```
