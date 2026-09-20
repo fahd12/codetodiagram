@@ -42,6 +42,15 @@ def test_snapshot_is_deterministic() -> None:
     assert first == second
 
 
+def test_groups_nodes_into_file_subgraphs() -> None:
+    text = render_mermaid(PythonAnalyzer().analyze(FIXTURE))
+    assert '["app.py"]' in text
+    assert '["helpers.py"]' in text
+    assert '["users.py"]' in text
+    assert '["external"]' in text
+    assert text.index('["app.py"]') < text.index('["helpers.py"]') < text.index('["external"]')
+
+
 def test_entry_uses_stadium_and_external_is_dashed() -> None:
     entry = _node("index", is_entry=True)
     helper = _node("helper")

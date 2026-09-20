@@ -34,11 +34,17 @@ GitHub repos must be cloned first; the CLI only reads a local path.
 
 ```mermaid
 flowchart TD
-    n779f8d511e7254f4(["Entry: __main__<br/>app.py:23"])
-    nf6af502f8db4b076(["Entry: index<br/>app.py:12"])
-    na3b0860d24b80397["greet<br/>helpers.py:8"]
-    n262692e051323530["fetch_remote<br/>helpers.py:18"]
-    n0ea057f4bb5ef2b8["get<br/>external"]:::external
+    subgraph app["app.py"]
+        n779f8d511e7254f4(["Entry: __main__"])
+        nf6af502f8db4b076(["Entry: index"])
+    end
+    subgraph helpers["helpers.py"]
+        na3b0860d24b80397["greet"]
+        n262692e051323530["fetch_remote"]
+    end
+    subgraph ext["external"]
+        n0ea057f4bb5ef2b8["get"]:::external
+    end
     n779f8d511e7254f4 --> na3b0860d24b80397
     nf6af502f8db4b076 --> na3b0860d24b80397
     nf6af502f8db4b076 --> n262692e051323530
@@ -78,7 +84,7 @@ Exit codes: `0` success, `1` error, `2` no entry points found.
 2. Parse with the stdlib `ast` module and build a symbol table.
 3. Resolve direct calls, `self`/`cls` methods, and imports. Unknown callees become external nodes.
 4. Detect entries: `if __name__ == "__main__"`, Flask/FastAPI routes, Click/Typer commands, Celery tasks.
-5. Bounded DFS from those entries, then render Mermaid (`flowchart TD`).
+5. Bounded DFS from those entries, then render Mermaid (`flowchart TD`) with nodes grouped by file.
 
 Node IDs are hashes of fully-qualified names so diffs stay stable.
 

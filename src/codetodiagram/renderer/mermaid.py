@@ -3,8 +3,9 @@
 from __future__ import annotations
 
 import json
+from collections.abc import Iterable
 
-from codetodiagram.models import Graph, Node
+from codetodiagram.models import Graph, Node, stable_node_id
 
 _ESCAPE = (
     ("&", "&amp;"),
@@ -30,8 +31,12 @@ def render_mermaid(graph: Graph, *, max_nodes: int = 50) -> str:
     lines = ["flowchart TD"]
     if omitted:
         lines.append(f"    %% Truncated: {omitted} nodes omitted")
-    for node in pruned.nodes.values():
-        lines.append(f"    {_node_declaration(node)}")
+    for file_key, nodes in _nodes_by_file(pruned.nodes.values()).items():
+        title = file_key or "external"
+        lines.append(f'    subgraph {_subgraph_id(file_key)}["{_escape(title)}"]')
+        for node in nodes:
+            lines.append(f"        {_node_declaration(node)}")
+        lines.append("    end")
     for edge in pruned.edges:
         target = pruned.nodes[edge.target_id]
         arrow = "-.->" if target.is_external else "-->"
@@ -116,6 +121,25 @@ def prune_graph(graph: Graph, max_nodes: int) -> tuple[Graph, int]:
     metadata["truncated"] = True
     metadata["omitted"] = omitted
     return Graph(nodes=nodes, edges=edges, metadata=metadata), omitted
+
+
+def _nodes_by_file(nodes: Iterable[Node]) -> dict[str, list[Node]]:
+    """Group nodes by source file; externals last under an empty key."""
+    grouped: dict[str, list[Node]] = {}
+    for node in nodes:
+        key = "" if node.is_external or not node.file else node.file
+        grouped.setdefault(key, []).append(node)
+    for key in grouped:
+        grouped[key].sort(key=lambda item: item.id)
+    ordered = {key: grouped[key] for key in sorted(key for key in grouped if key)}
+    if "" in grouped:
+        ordered[""] = grouped[""]
+    return ordered
+
+
+def _subgraph_id(file_key: str) -> str:
+    """Return a stable Mermaid subgraph id for a file path."""
+    return "sg" + stable_node_id(file_key or "external")[1:]
 
 
 def _node_declaration(node: Node) -> str:
