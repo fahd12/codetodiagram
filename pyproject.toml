@@ -29,6 +29,11 @@ dev = [
     "pytest-cov",
     "ruff",
     "mypy",
+    "httpx",
+]
+web = [
+    "fastapi",
+    "uvicorn[standard]",
 ]
 
 [project.scripts]

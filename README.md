@@ -78,6 +78,15 @@ Exit codes: `0` success, `1` error, `2` no entry points found.
 - run: codetodiagram . --output diagram.mmd
 ```
 
+### Local API (no public host)
+
+```bash
+pip install -e ".[web]"
+python -m codetodiagram.api
+```
+
+`GET /api/health` and `POST /api/analyze` with JSON `{"source": "path-or-https://github.com/owner/repo"}`. The frontend is not built yet.
+
 ## How it works
 
 1. Walk `.py` files (skips `.venv`, `__pycache__`, `.git`, `build`, `dist`, …).
@@ -97,7 +106,7 @@ Node IDs are hashes of fully-qualified names so diffs stay stable.
 
 ## Contributing
 
-Dev install: `pip install -e ".[dev]"`. Then `ruff check src tests`, `mypy`, and `pytest --cov=codetodiagram.analyzer --cov=codetodiagram.renderer --cov-fail-under=80`.
+Dev install: `pip install -e ".[dev,web]"`. Then `ruff check src tests`, `mypy`, and `pytest --cov=codetodiagram.analyzer --cov=codetodiagram.renderer --cov-fail-under=80`.
 
 ## License
 
